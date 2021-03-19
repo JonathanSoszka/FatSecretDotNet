@@ -6,8 +6,8 @@ namespace FatSecretDotNet.RequestObjects
     {
         private readonly string _method = "foods.search";
         public string SearchExpression { get; set; }
-        public int PageNumber { get; set; }
-        public int MaxResults { get; set; }
+        public int PageNumber { get; set; } = 1;
+        public int MaxResults { get; set; } = 50;
 
         public List<(string, string)> GetHeaders()
         {

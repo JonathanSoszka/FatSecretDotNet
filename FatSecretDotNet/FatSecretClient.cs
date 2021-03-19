@@ -20,12 +20,12 @@ namespace FatSecretDotNet
             _client = new RestClient("https://platform.fatsecret.com/rest/server.api");
         }
 
-        public GetFoodResponse GetFood(FoodGetRequest request)
+        public GetFoodResponse FoodGet(FoodGetRequest request)
         {
             return FatSecretRequest<GetFoodResponse>(request);
         }
 
-        public SearchFoodResponse SearchFood(FoodsSearchRequest request)
+        public SearchFoodResponse FoodsSearch(FoodsSearchRequest request)
         {
             return FatSecretRequest<SearchFoodResponse>(request);
         }
