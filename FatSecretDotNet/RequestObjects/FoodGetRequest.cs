@@ -2,12 +2,12 @@ using System.Collections.Generic;
 
 namespace FatSecretDotNet.RequestObjects
 {
-    public class GetFoodRequest : IFatSecretRequest
+    public class FoodGetRequest : IFatSecretRequest
     {
         private readonly string _method = "food.get.v2";
         public int FoodId { get; set; }
 
-        public GetFoodRequest()
+        public FoodGetRequest()
         {
          
         }

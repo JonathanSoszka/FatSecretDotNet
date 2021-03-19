@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace FatSecretDotNet.RequestObjects
 {
-    public class SearchFoodsRequest : IFatSecretRequest
+    public class FoodsSearchRequest : IFatSecretRequest
     {
         private readonly string _method = "foods.search";
         public string SearchExpression { get; set; }
