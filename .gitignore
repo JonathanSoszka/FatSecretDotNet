@@ -403,3 +403,4 @@ fabric.properties
 
 .idea/*
 .idea/**
+./FatSecretDotNetUnitTest\Credentials.cs
