@@ -6,7 +6,7 @@ namespace FatSecretDotNet.RequestObjects
     {
         public readonly string _method = "recipe_types.get";
 
-        public List<(string, string)> GetHeaders()
+        public List<(string, string)> GetParameters()
         {
             var headers = new List<(string,string)>();
             headers.Add(("method", _method));

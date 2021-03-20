@@ -9,7 +9,7 @@ namespace FatSecretDotNet.RequestObjects
         public int PageNumber { get; set; } = 1;
         public int MaxResults { get; set; } = 50;
 
-        public List<(string, string)> GetHeaders()
+        public List<(string, string)> GetParameters()
         {
            var headers = new List<(string,string)>();
                 headers.Add(("method", _method));

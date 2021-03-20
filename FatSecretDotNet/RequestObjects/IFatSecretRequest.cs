@@ -4,6 +4,6 @@ namespace FatSecretDotNet.RequestObjects
 {
     public interface IFatSecretRequest
     {
-        List<(string, string)> GetHeaders();
+        List<(string, string)> GetParameters();
     }
 }

@@ -50,7 +50,7 @@ namespace FatSecretDotNet
             var request = new RestRequest(Method.GET);
             request.AddHeader("Authorization", _authManager.AuthHeader);
 
-            foreach (var header in fatSecretRequest.GetHeaders())
+            foreach (var header in fatSecretRequest.GetParameters())
             {
                 request.AddParameter(header.Item1, header.Item2);
             }
