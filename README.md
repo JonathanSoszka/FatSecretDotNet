@@ -14,9 +14,9 @@ FatSecretDotNet is a a .Net 5.0 class library which makes it super simple to acc
 To begin using this library in your project first make sure you [Register for a FatSecret developer account](https://platform.fatsecret.com/api/Default.aspx?screen=r) once registered apply for API access to retrieve your client id and client secret, these will be needed to authenticate.
 
 ### Installing
-FatSecretDotNet is hosted on [Nuget](https://www.nuget.org/packages/FatSecretDotNet/) and can easily be added to your project by using a Nuget package manager or by using a command line tool.
+FatSecretDotNet is hosted on [Nuget](https://www.nuget.org/packages/FatSecretDotNet/) and can easily be added to your project by using a Nuget package manager or by using the .net cli.
 
-`Install-Package FatSecretDotNet -Version 1.0.0`
+`dotnet add package FatSecretDotNet --version 1.0.0`
 
 ## Usage
 The fat secret API is accessed through an instance of the `FatSecretClient` class. This classes constructor takes your credentials and will automatically manage authentication for your requests
