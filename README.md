@@ -42,7 +42,7 @@ var foodSearchRequest = new FoodsSearchRequest()
 var foods = client.FoodsSearch(foodSearchRequest);
 ```
 
-See more usage examples here
+See more usage examples [here](docs/UsageExamples.md)
 
 ## Technical Details
 ### Client Methods
