@@ -1,6 +1,8 @@
 # FatSecretDotNet
 .Net 5.0 Class Library to wrap the [Fat Secret public REST API.](https://platform.fatsecret.com/api/Default.aspx?screen=rapiref2)
 
+** As oof V1.0 only the methods granted under the basic scope are implemented. Premier scope methods coming soon.
+
 ## Summary
 FatSecretDotNet is a a .Net 5.0 class library which makes it super simple to access the FatSecret [Fat Secret public REST API.](https://platform.fatsecret.com/api/Default.aspx?screen=rapiref2)
 
