@@ -22,7 +22,7 @@ FatSecretDotNet is hosted on [Nuget](https://www.nuget.org/packages/FatSecretDot
 The fat secret API is accessed through an instance of the `FatSecretClient` class. This classes constructor takes your credentials and will automatically manage authentication for your requests
 
 ### Creating an instance of the client
-The client must be instanciated before a request is made. Each client contains its own AuthManager scheme which means each client will try to get its own access token. For this reason it is recommended to reuse the client when possible, and to register it with your DI container if you are using one.
+The client must be instantiated before a request is made. Each client contains its own AuthManager scheme which means each client will try to get its own access token. For this reason it is recommended to reuse the client when possible, and to register it with your DI container if you are using one.
 ```
   var credentials = new FatSecretCredentials()
   {
