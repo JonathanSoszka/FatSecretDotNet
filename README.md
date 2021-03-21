@@ -35,11 +35,11 @@ The client must be instantiated before a request is made. Each client contains i
 ```
 
 ### Dependency Injection
-An extension method is also availible to easily add a client to the dot net DI container
+An extension method is also available to easily add a client to the dot net DI container
 ```
 services.AddFatSecretClient(credentials);
 ```
-The client can then be procided to any class as so
+The client can then be provided to any class as so
 ```
 private readonly IFatSecretClient _fsClient;
 
