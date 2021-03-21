@@ -16,7 +16,7 @@ To begin using this library in your project first make sure you [Register for a 
 ### Installing
 FatSecretDotNet is hosted on [Nuget](https://www.nuget.org/packages/FatSecretDotNet/) and can easily be added to your project by using a Nuget package manager or by using the .net cli.
 
-`dotnet add package FatSecretDotNet --version 1.0.0`
+`dotnet add package FatSecretDotNet --version 1.0.1`
 
 ## Usage
 The fat secret API is accessed through an instance of the `FatSecretClient` class. This classes constructor takes your credentials and will automatically manage authentication for your requests
