@@ -33,6 +33,22 @@ The client must be instantiated before a request is made. Each client contains i
 
   var client = new FatSecretClient(credentials);
 ```
+
+### Dependency Injection
+An extension method is also availible to easily add a client to the dot net DI container
+```
+services.AddFatSecretClient(credentials);
+```
+The client can then be procided to any class as so
+```
+private readonly IFatSecretClient _fsClient;
+
+public WeatherForecastController(IFatSecretClient fsClient)
+{
+  _fsClient = fsClient;
+}
+```
+
 **Note: It is not recommended to ever store your secret in plain text, please use a secure method to store your secret in your application**
 
 ### Using the client
