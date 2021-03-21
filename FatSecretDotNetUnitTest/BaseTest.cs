@@ -27,7 +27,7 @@ namespace FatSecretDotNetUnitTest
         protected void AssertFailedResponseWithError(FatSecretResponse response)
         {
             Assert.False(response.Successful);
-            Assert.NotNull(response.Error.Code);
+            Assert.NotEqual(0, response.Error.Code);
             Assert.NotNull(response.Error.Message);
         }
     }

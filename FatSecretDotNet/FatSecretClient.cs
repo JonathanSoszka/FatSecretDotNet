@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace FatSecretDotNet
 {
-    public class FatSecretClient
+    public class FatSecretClient : IFatSecretClient
     {
         private readonly FatSecretAuthManager _authManager;
         private readonly IRestClient _client;
@@ -25,9 +25,9 @@ namespace FatSecretDotNet
             return FatSecretRequest<GetFoodResponse>(request);
         }
 
-        public SearchFoodResponse FoodsSearch(FoodsSearchRequest request)
+        public FoodsSearchResponse FoodsSearch(FoodsSearchRequest request)
         {
-            return FatSecretRequest<SearchFoodResponse>(request);
+            return FatSecretRequest<FoodsSearchResponse>(request);
         }
 
         public RecipieTypesResponse GetRecipieTypes()
@@ -68,5 +68,14 @@ namespace FatSecretDotNet
 
             return fatSecretResponse;
         }
+    }
+
+    public interface IFatSecretClient
+    {
+        GetFoodResponse FoodGet(FoodGetRequest request);
+        FoodsSearchResponse FoodsSearch(FoodsSearchRequest request);
+        RecipieTypesResponse GetRecipieTypes();
+        RecipesSearchResponse RecipesSearch(RecipesSearchRequest request);
+        RecipeGetResponse RecipeGet(RecipeGetRequest request);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace FatSecretDotNet.ResponseObjects
 {
-    public class SearchFoodResponse : FatSecretResponse
+    public class FoodsSearchResponse : FatSecretResponse
     {
         public SearchedFoods Foods { get; set; }
     }
