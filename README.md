@@ -16,7 +16,7 @@ To begin using this library in your project first make sure you [Register for a 
 ### Installing
 FatSecretDotNet is hosted on [Nuget](https://www.nuget.org/packages/FatSecretDotNet/) and can easily be added to your project by using a Nuget package manager or by using the .net cli.
 
-`dotnet add package FatSecretDotNet --version 1.0.0`
+`dotnet add package FatSecretDotNet --version 1.0.1`
 
 ## Usage
 The fat secret API is accessed through an instance of the `FatSecretClient` class. This classes constructor takes your credentials and will automatically manage authentication for your requests
@@ -33,6 +33,22 @@ The client must be instantiated before a request is made. Each client contains i
 
   var client = new FatSecretClient(credentials);
 ```
+
+### Dependency Injection
+An extension method is also available to easily add a client to the dot net DI container
+```
+services.AddFatSecretClient(credentials);
+```
+The client can then be provided to any class as so
+```
+private readonly IFatSecretClient _fsClient;
+
+public WeatherForecastController(IFatSecretClient fsClient)
+{
+  _fsClient = fsClient;
+}
+```
+
 **Note: It is not recommended to ever store your secret in plain text, please use a secure method to store your secret in your application**
 
 ### Using the client
