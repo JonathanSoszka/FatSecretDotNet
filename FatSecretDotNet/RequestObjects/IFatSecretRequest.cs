@@ -4,6 +4,6 @@ namespace FatSecretDotNet.RequestObjects
 {
     public interface IFatSecretRequest
     {
-        List<(string, string)> GetParameters();
+        List<(string, string)> GetParameters(bool isPremier);
     }
 }

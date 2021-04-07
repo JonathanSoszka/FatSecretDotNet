@@ -7,7 +7,7 @@ namespace FatSecretDotNet.RequestObjects
         private readonly string _method = "recipe.get";
         public long RecipeId { get; set; }
         
-        public List<(string,string)> GetParameters()
+        public List<(string,string)> GetParameters(bool isPremier)
         {
             var headers = new List<(string,string)>();
             headers.Add(("method", _method));

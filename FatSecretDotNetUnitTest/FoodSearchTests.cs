@@ -1,6 +1,8 @@
+using System.Linq;
 using FatSecretDotNet;
 using FatSecretDotNet.Authentication;
 using FatSecretDotNet.RequestObjects;
+using FatSecretDotNet.ResponseObjects;
 using FatSecretDotNetUnitTest.Helpers;
 using Xunit;
 
@@ -51,6 +53,21 @@ namespace FatSecretDotNetUnitTest
             var response = client.FoodsSearch(request);
             Assert.Equal(int.Parse(response.Foods.PageNumber), pageNumber);
             AssertSuccessfulResponse(response);
+        }
+
+        [Fact]
+        public void PremierParametersWork()
+        {
+            var request = new FoodsSearchRequest
+            {
+                SearchExpression = "Apple",
+                GenericDescription = GenericDescription.Portion
+            };
+            var client = GetClient();
+            var response = client.FoodsSearch(request);
+            Assert.IsType<FoodsSearchResponse>(response);
+            Assert.Contains("Per 1 medium", response.Foods.Food.First().FoodDescription);
+
         }
         
         [Fact]

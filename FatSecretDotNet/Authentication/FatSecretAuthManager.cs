@@ -1,3 +1,4 @@
+using System;
 using FatSecretDotNet.ResponseObjects;
 using RestSharp;
 
@@ -8,6 +9,8 @@ namespace FatSecretDotNet.Authentication
         private readonly FatSecretAuthToken _authToken;
         private RestClient _client;
         private readonly FatSecretCredentials _credentials;
+
+        public bool IsPremier => _credentials.Scope.Equals("premier", StringComparison.OrdinalIgnoreCase);
 
         public FatSecretAuthManager(FatSecretCredentials credentials)
         {
