@@ -33,6 +33,7 @@ The client must be instantiated before a request is made. Each client contains i
 
   var client = new FatSecretClient(credentials);
 ```
+**Note: It is not recommended to ever store your secret in plain text, please use a secure method to store your secret in your application**
 
 ### Dependency Injection
 An extension method is also available to easily add a client to the dot net DI container
@@ -49,7 +50,7 @@ public WeatherForecastController(IFatSecretClient fsClient)
 }
 ```
 
-**Note: It is not recommended to ever store your secret in plain text, please use a secure method to store your secret in your application**
+
 
 ### Using the client
 The client has a method for each FatSecret API resource. Each Method takes a Request Object that is used to form the parameters of the request
