@@ -6,7 +6,7 @@
 ## Summary
 FatSecretDotNet is a .Net 5.0 class library which makes it super simple to access the [Fat Secret public REST API.](https://platform.fatsecret.com/api/Default.aspx?screen=rapiref2)
 
-**As of Version 1.0 only the methods granted under the basic scope are implemented. Premier scope methods coming soon.**
+**As of Version 1.1.x only the methods granted under the basic scope are implemented. Premier scope methods coming soon.**
 
 ## Getting Started
 
@@ -16,7 +16,7 @@ To begin using this library in your project first make sure you [Register for a 
 ### Installing
 FatSecretDotNet is hosted on [Nuget](https://www.nuget.org/packages/FatSecretDotNet/) and can easily be added to your project by using a Nuget package manager or by using the .net cli.
 
-`dotnet add package FatSecretDotNet --version 1.0.1`
+`dotnet add package FatSecretDotNet`
 
 ## Usage
 The fat secret API is accessed through an instance of the `FatSecretClient` class. This classes constructor takes your credentials and will automatically manage authentication for your requests
@@ -33,6 +33,7 @@ The client must be instantiated before a request is made. Each client contains i
 
   var client = new FatSecretClient(credentials);
 ```
+**Note: It is not recommended to ever store your secret in plain text, please use a secure method to store your secret in your application**
 
 ### Dependency Injection
 An extension method is also available to easily add a client to the dot net DI container
@@ -49,7 +50,7 @@ public WeatherForecastController(IFatSecretClient fsClient)
 }
 ```
 
-**Note: It is not recommended to ever store your secret in plain text, please use a secure method to store your secret in your application**
+
 
 ### Using the client
 The client has a method for each FatSecret API resource. Each Method takes a Request Object that is used to form the parameters of the request
