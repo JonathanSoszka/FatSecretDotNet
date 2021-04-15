@@ -1,28 +1,29 @@
+using System.Threading.Tasks;
 using FatSecretDotNet;
 using FatSecretDotNet.Authentication;
 using FatSecretDotNet.RequestObjects;
-using FatSecretDotNetUnitTest.Helpers;
+using FatSecretDotNetIntegrationTest.Helpers;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class RecipeSearchTests : BaseTest
     {
         [Fact]
-        public void SearchRecipesYieldsResults()
+        public async Task  SearchRecipesYieldsResults()
         {
             var client = GetClient();
             var request = new RecipesSearchRequest()
             {
                 SearchExpression = "Cake"
             };
-            var response = client.RecipesSearch(request);
+            var response = await client.RecipesSearchAsync(request);
             Assert.True(response.Recipes.Recipe.Count > 1);
             AssertSuccessfulResponse(response);
         }
         
         [Fact]
-        public void SearchMaxResultsWorks()
+        public async Task  SearchMaxResultsWorks()
         {
             var maxResults = 20;
             var client = GetClient();
@@ -31,13 +32,13 @@ namespace FatSecretDotNetUnitTest
                 SearchExpression = "Cake",
                 MaxResults = maxResults
             };
-            var response = client.RecipesSearch(request);
+            var response = await client.RecipesSearchAsync(request);
             Assert.Equal(response.Recipes.Recipe.Count, maxResults);
             AssertSuccessfulResponse(response);
         }
 
         [Fact]
-        public void SearchPaganationWorks()
+        public async Task  SearchPaganationWorks()
         {
             var maxResults = 20;
             var pageNumber = 3;
@@ -48,13 +49,13 @@ namespace FatSecretDotNetUnitTest
                 MaxResults = maxResults,
                 PageNumber = pageNumber
             };
-            var response = client.RecipesSearch(request);
+            var response = await client.RecipesSearchAsync(request);
             Assert.Equal(pageNumber, int.Parse(response.Recipes.PageNumber));
             AssertSuccessfulResponse(response);
         }
         
         [Fact]
-        public void CanProduceError()
+        public async Task  CanProduceError()
         {
             var client = GetClient();
             var request = new RecipesSearchRequest()
@@ -63,7 +64,7 @@ namespace FatSecretDotNetUnitTest
                 MaxResults = 0,
                 PageNumber = 0
             };
-            var response = client.RecipesSearch(request);
+            var response = await client.RecipesSearchAsync(request);
             AssertFailedResponseWithError(response);
         }
     }

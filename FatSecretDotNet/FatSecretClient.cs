@@ -20,35 +20,36 @@ namespace FatSecretDotNet
             _client = new RestClient("https://platform.fatsecret.com/rest/server.api");
         }
 
-        public GetFoodResponse FoodGet(FoodGetRequest request)
+        public async Task<GetFoodResponse> FoodGetAsync(FoodGetRequest request)
         {
-            return FatSecretRequest<GetFoodResponse>(request);
+            return await FatSecretRequest<GetFoodResponse>(request);
         }
 
-        public FoodsSearchResponse FoodsSearch(FoodsSearchRequest request)
+        public async Task<FoodsSearchResponse> FoodsSearchAsync(FoodsSearchRequest request)
         {
-            return FatSecretRequest<FoodsSearchResponse>(request);
+            return await FatSecretRequest<FoodsSearchResponse>(request);
         }
 
-        public RecipieTypesResponse GetRecipieTypes()
+        public async Task<RecipieTypesResponse> RecipeTypesGetAsync()
         {
-            return FatSecretRequest<RecipieTypesResponse>(new RecipieTypesRequest());
+            return await FatSecretRequest<RecipieTypesResponse>(new RecipieTypesRequest());
         }
 
-        public RecipesSearchResponse RecipesSearch(RecipesSearchRequest request)
+        public async Task<RecipesSearchResponse> RecipesSearchAsync(RecipesSearchRequest request)
         {
-            return FatSecretRequest<RecipesSearchResponse>(request);
+            return await FatSecretRequest<RecipesSearchResponse>(request);
         }
 
-        public RecipeGetResponse RecipeGet(RecipeGetRequest request)
+        public async Task<RecipeGetResponse> RecipeGetAsync(RecipeGetRequest request)
         {
-            return FatSecretRequest<RecipeGetResponse>(request);
+            return await FatSecretRequest<RecipeGetResponse>(request);
         }
 
-        private T FatSecretRequest<T>(IFatSecretRequest fatSecretRequest) where T : FatSecretResponse
+        private async Task<T> FatSecretRequest<T>(IFatSecretRequest fatSecretRequest) where T : FatSecretResponse
         {
             var request = new RestRequest(Method.GET);
-            request.AddHeader("Authorization", _authManager.AuthHeader);
+            var authToken = await _authManager.GetAuthHeaderAsync();
+            request.AddHeader("Authorization", authToken);
 
             foreach (var parameter in fatSecretRequest.GetParameters(_authManager.IsPremier))
             {
@@ -57,7 +58,7 @@ namespace FatSecretDotNet
 
             request.AddParameter("format", "json");
 
-            var response = _client.Execute<T>(request);
+            var response = await _client.ExecuteAsync<T>(request);
             var fatSecretResponse = response.Data;
 
             var fatSecretErrorResponse = JsonConvert.DeserializeObject<FatSecretErrorResponse>(response.Content);
@@ -72,10 +73,10 @@ namespace FatSecretDotNet
 
     public interface IFatSecretClient
     {
-        GetFoodResponse FoodGet(FoodGetRequest request);
-        FoodsSearchResponse FoodsSearch(FoodsSearchRequest request);
-        RecipieTypesResponse GetRecipieTypes();
-        RecipesSearchResponse RecipesSearch(RecipesSearchRequest request);
-        RecipeGetResponse RecipeGet(RecipeGetRequest request);
+        Task<GetFoodResponse> FoodGetAsync(FoodGetRequest request);
+        Task<FoodsSearchResponse> FoodsSearchAsync(FoodsSearchRequest request);
+        Task<RecipieTypesResponse> RecipeTypesGetAsync();
+        Task<RecipesSearchResponse> RecipesSearchAsync(RecipesSearchRequest request);
+        Task<RecipeGetResponse> RecipeGetAsync(RecipeGetRequest request);
     }
 }

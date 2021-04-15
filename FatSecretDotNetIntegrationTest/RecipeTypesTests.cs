@@ -1,14 +1,15 @@
+using System.Threading.Tasks;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class RecipeTypesTests : BaseTest
     {
         [Fact]
-        public void GetRecipeTypesYieldsResults()
+        public async Task  GetRecipeTypesYieldsResults()
         {
             var client = GetClient();
-            var response = client.GetRecipieTypes();
+            var response = await client.RecipeTypesGetAsync();
             AssertSuccessfulResponse(response);
             Assert.True(response.RecipeTypes.RecipeType.Count > 0);
         }

@@ -1,10 +1,10 @@
 using FatSecretDotNet;
 using FatSecretDotNet.Authentication;
 using FatSecretDotNet.ResponseObjects;
-using FatSecretDotNetUnitTest.Helpers;
+using FatSecretDotNetIntegrationTest.Helpers;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class BaseTest
     {

@@ -1,24 +1,25 @@
+using System.Threading.Tasks;
 using FatSecretDotNet;
 using FatSecretDotNet.Authentication;
 using FatSecretDotNet.RequestObjects;
-using FatSecretDotNetUnitTest.Helpers;
+using FatSecretDotNetIntegrationTest.Helpers;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class RecipeGetTests : BaseTest
     {
         private int recipeId = 91;
 
         [Fact]
-        public void RecipeGetWorks()
+        public async Task RecipeGetWorks()
         {
             var client = GetClient();
             var request = new RecipeGetRequest()
             {
                 RecipeId = recipeId
             };
-            var response = client.RecipeGet(request);
+            var response = await client.RecipeGetAsync(request);
             Assert.NotNull(response.Recipe);
             AssertSuccessfulResponse(response);
        
@@ -26,28 +27,28 @@ namespace FatSecretDotNetUnitTest
         }
 
         [Fact]
-        public void RecipeGetReturnsCorrectItem()
+        public async Task  RecipeGetReturnsCorrectItem()
         {
             var client = GetClient();
             var request = new RecipeGetRequest()
             {
                 RecipeId = recipeId
             };
-            var response = client.RecipeGet(request);
+            var response = await client.RecipeGetAsync(request);
             Assert.Equal(recipeId, int.Parse(response.Recipe.RecipeId));
             AssertSuccessfulResponse(response);
         }
         
         
         [Fact]
-        public void CanProduceError()
+        public async Task  CanProduceError()
         {
             var client = GetClient();
             var request = new RecipeGetRequest()
             {
                 RecipeId = 0
             };
-            var response = client.RecipeGet(request);
+            var response = await client.RecipeGetAsync(request);
             AssertFailedResponseWithError(response);
         }
     }

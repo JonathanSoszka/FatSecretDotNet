@@ -3,7 +3,7 @@ using FatSecretDotNet.Authentication;
 using FatSecretDotNet.RequestObjects;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class DocumentationTests : BaseTest
     {
@@ -29,7 +29,7 @@ namespace FatSecretDotNetUnitTest
             {
                 SearchExpression = "Apples"
             };
-            var foods = client.FoodsSearch(foodSearchRequest);
+            var foods = client.FoodsSearchAsync(foodSearchRequest);
         }
         
         

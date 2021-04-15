@@ -1,30 +1,31 @@
 using System.Linq;
+using System.Threading.Tasks;
 using FatSecretDotNet;
 using FatSecretDotNet.Authentication;
 using FatSecretDotNet.RequestObjects;
 using FatSecretDotNet.ResponseObjects;
-using FatSecretDotNetUnitTest.Helpers;
+using FatSecretDotNetIntegrationTest.Helpers;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class FoodSearchTests : BaseTest
     {
         [Fact]
-        public void SearchFoodYieldsResults()
+        public async Task  SearchFoodYieldsResults()
         {
             var client = GetClient();
             var request = new FoodsSearchRequest()
             {
                 SearchExpression = "Apple"
             };
-            var response = client.FoodsSearch(request);
+            var response = await client.FoodsSearchAsync(request);
             Assert.True(response.Foods.Food.Count > 1);
             AssertSuccessfulResponse(response);
         }
         
         [Fact]
-        public void SearchMaxResultsWorks()
+        public async Task  SearchMaxResultsWorks()
         {
             var maxResults = 20;
             var client = GetClient();
@@ -33,13 +34,13 @@ namespace FatSecretDotNetUnitTest
                 SearchExpression = "Apple",
                 MaxResults = maxResults
             };
-            var response = client.FoodsSearch(request);
+            var response = await client.FoodsSearchAsync(request);
             Assert.Equal(response.Foods.Food.Count, maxResults);
             AssertSuccessfulResponse(response);
         }
         
         [Fact]
-        public void SearchPaganationWorks()
+        public async Task  SearchPaganationWorks()
         {
             var maxResults = 20;
             var pageNumber = 3;
@@ -50,13 +51,13 @@ namespace FatSecretDotNetUnitTest
                 MaxResults = maxResults,
                 PageNumber = pageNumber
             };
-            var response = client.FoodsSearch(request);
+            var response = await client.FoodsSearchAsync(request);
             Assert.Equal(int.Parse(response.Foods.PageNumber), pageNumber);
             AssertSuccessfulResponse(response);
         }
 
         [Fact]
-        public void PremierParametersWork()
+        public async Task  PremierParametersWork()
         {
             var request = new FoodsSearchRequest
             {
@@ -64,14 +65,14 @@ namespace FatSecretDotNetUnitTest
                 GenericDescription = GenericDescription.Portion
             };
             var client = GetClient();
-            var response = client.FoodsSearch(request);
+            var response = await  client.FoodsSearchAsync(request);
             Assert.IsType<FoodsSearchResponse>(response);
             Assert.Contains("Per 1 medium", response.Foods.Food.First().FoodDescription);
 
         }
         
         [Fact]
-        public void CanProduceError()
+        public async Task  CanProduceError()
         {
             var client = GetClient();
             var request = new FoodsSearchRequest()
@@ -80,7 +81,7 @@ namespace FatSecretDotNetUnitTest
                 PageNumber = 0,
                 MaxResults = 0
             };
-            var response = client.FoodsSearch(request);
+            var response = await client.FoodsSearchAsync(request);
             AssertFailedResponseWithError(response);
         }
     }

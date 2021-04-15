@@ -1,11 +1,12 @@
 using System;
+using System.Threading.Tasks;
 using FatSecretDotNet;
 using FatSecretDotNet.Authentication;
 using FatSecretDotNet.RequestObjects;
-using FatSecretDotNetUnitTest.Helpers;
+using FatSecretDotNetIntegrationTest.Helpers;
 using Xunit;
 
-namespace FatSecretDotNetUnitTest
+namespace FatSecretDotNetIntegrationTest
 {
     public class AuthTests : BaseTest
     {
@@ -18,13 +19,14 @@ namespace FatSecretDotNetUnitTest
         }
         
         [Fact]
-        public void AuthManagerProducesBearerToken()
+        public async Task AuthManagerProducesBearerToken()
         {
             var credentials = GetCredentials();
             var authManager = new FatSecretAuthManager(credentials);
+            var authToken = await authManager.GetAuthHeaderAsync();
 
-            Assert.Contains("Bearer ", authManager.AuthHeader);
-            Assert.True(authManager.AuthHeader.Length > "Bearer ".Length);
+            Assert.Contains("Bearer ", authToken);
+            Assert.True(authToken.Replace("Bearer ","").Length > 0);
         }
         
     }

@@ -2,7 +2,7 @@ using System.IO;
 using FatSecretDotNet.Authentication;
 using Microsoft.Extensions.Configuration;
 
-namespace FatSecretDotNetUnitTest.Helpers
+namespace FatSecretDotNetIntegrationTest.Helpers
 {
     //store your credentials in appsettings.json wherever the app is compiled to
     //this is most likely bin/Debug/net5.0

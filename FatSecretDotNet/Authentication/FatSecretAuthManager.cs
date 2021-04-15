@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using FatSecretDotNet.ResponseObjects;
 using RestSharp;
 
@@ -17,32 +18,31 @@ namespace FatSecretDotNet.Authentication
             _credentials = credentials;
             _client = new RestClient("https://oauth.fatsecret.com/connect/token");
             _authToken = new FatSecretAuthToken();
-            GetNewToken();
         }
 
-        private void GetNewToken()
+        private async Task GetNewTokenAsync()
         {
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("content-type", "application/x-www-form-urlencoded");
-            request.AddParameter("application/x-www-form-urlencoded", $"grant_type=client_credentials&client_id={_credentials.ClientId}&client_secret={_credentials.ClientSecret}&scope={_credentials.Scope}", ParameterType.RequestBody);
-            var authTokenResponse = _client.Execute<AuthResponse>(request).Data;
-            _authToken.SetToken(authTokenResponse);
+            request.AddParameter("application/x-www-form-urlencoded",
+                $"grant_type=client_credentials&client_id={_credentials.ClientId}&client_secret={_credentials.ClientSecret}&scope={_credentials.Scope}",
+                ParameterType.RequestBody);
+            var authTokenResponse = await _client.ExecuteAsync<AuthResponse>(request);
+            var authToken = authTokenResponse.Data;
+            _authToken.SetToken(authToken);
         }
 
-        public string AuthHeader
+        public async Task<string> GetAuthHeaderAsync()
         {
-            get
-            {
+          
                 if (_authToken.IsExpired)
                 {
-                    GetNewToken();
+                    await GetNewTokenAsync();
                 }
 
                 return $"Bearer {_authToken.AccessToken}";
-            }
+            
         }
-        
-        
     }
 }

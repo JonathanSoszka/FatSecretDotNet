@@ -11,6 +11,7 @@ namespace FatSecretDotNet.ResponseObjects
     {
         public string FoodId { get; set; }
         public string FoodName { get; set; }
+        public string BrandName { get; set; }
         public string FoodType { get; set; }
         public string FoodUrl { get; set; }
         public Servings Servings { get; set; }
@@ -42,6 +43,7 @@ namespace FatSecretDotNet.ResponseObjects
         public string ServingDescription { get; set; }
         public string ServingId { get; set; }
         public string ServingUrl { get; set; }
+        public int IsDefault { get; set; }
         public string Sodium { get; set; }
         public string Sugar { get; set; }
         public string VitaminA { get; set; }
