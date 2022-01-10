@@ -23,7 +23,7 @@ The fat secret API is accessed through an instance of the `FatSecretClient` clas
 
 ### Creating an instance of the client
 The client must be instantiated before a request is made. Each client contains its own AuthManager scheme which means each client will try to get its own access token. For this reason it is recommended to reuse the client when possible, and to register it with your DI container if you are using one.
-```
+```c#
   var credentials = new FatSecretCredentials()
   {
      ClientId = "Your Client Id",
@@ -37,11 +37,11 @@ The client must be instantiated before a request is made. Each client contains i
 
 ### Dependency Injection
 An extension method is also available to easily add a client to the dot net DI container
-```
+```c#
 services.AddFatSecretClient(credentials);
 ```
 The client can then be provided to any class as so
-```
+```c#
 private readonly IFatSecretClient _fsClient;
 
 public WeatherForecastController(IFatSecretClient fsClient)
@@ -54,7 +54,7 @@ public WeatherForecastController(IFatSecretClient fsClient)
 
 ### Using the client
 The client has a method for each FatSecret API resource. Each Method takes a Request Object that is used to form the parameters of the request
-```
+```c#
 var foodSearchRequest = new FoodsSearchRequest()
 {
   SearchExpression = "Apples"
